@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:nav1/logic/di.dart';
 import 'package:nav1/router.dart';
+
+import 'logic/auth.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final _appRouter = AppRouter();
+  final _appRouter = AppRouter(authGuard: AuthGuard(Auth.auth), initGuard: InitGuard(DI.di));
 
   MyApp({Key? key}) : super(key: key);
 

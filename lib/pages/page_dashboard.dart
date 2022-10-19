@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../logic/auth.dart';
+import '../router.dart';
 
 class PageDashboard extends StatelessWidget {
   const PageDashboard({Key? key}) : super(key: key);
@@ -20,6 +22,11 @@ class PageDashboard extends StatelessWidget {
                   Auth.auth.notifyListeners();
                 },
                 child: Text('wyloguj')),
+            ElevatedButton(
+                onPressed: () {
+                  AutoRouter.of(context).pushNamed("/loading");
+                },
+                child: Text('Ładuj dane')),
           ],
         ),
       ),

@@ -14,16 +14,14 @@ part 'router.gr.dart';
   routes: <AutoRoute>[
     MaterialRoute(page: PageLoading, path: '/loading'),
     MaterialRoute(page: PageLogin, path: '/login'),
-    MaterialRoute(
-        page: PageDashboard, path: '/', guards: [InitGuard, AuthGuard]),
+    MaterialRoute(page: PageDashboard, path: '/', guards: [InitGuard, AuthGuard]),
   ],
 )
 class AppRouter extends _$AppRouter {
-  AppRouter()
-      : super(
-          authGuard: AuthGuard(Auth.auth),
-          initGuard: InitGuard(DI.di),
-        );
+  AppRouter({
+    required super.initGuard,
+    required super.authGuard,
+  });
 }
 
 class AuthGuard extends AutoRedirectGuard {
@@ -39,8 +37,7 @@ class AuthGuard extends AutoRedirectGuard {
   }
 
   @override
-  Future<void> onNavigation(
-      NavigationResolver resolver, StackRouter router) async {
+  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
     if (await canNavigate(resolver.route)) {
       resolver.next();
     } else {
@@ -55,8 +52,7 @@ class InitGuard extends AutoRouteGuard {
   InitGuard(this.di);
 
   @override
-  Future<void> onNavigation(
-      NavigationResolver resolver, StackRouter router) async {
+  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
     if (!di.isInitialized) {
       await di.init();
     }
