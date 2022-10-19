@@ -27,6 +27,11 @@ class PageDashboard extends StatelessWidget {
                   AutoRouter.of(context).pushNamed("/loading");
                 },
                 child: Text('Ładuj dane')),
+            ElevatedButton(
+                onPressed: () {
+                  AutoRouter.of(context).pushNamed("/detail/test");
+                },
+                child: Text('Szcegóły')),
           ],
         ),
       ),

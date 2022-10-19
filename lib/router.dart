@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:nav1/logic/auth.dart';
+import 'package:nav1/pages/page_detail.dart';
 import 'package:nav1/pages/page_loading.dart';
 
 import 'logic/di.dart';
@@ -12,6 +13,7 @@ part 'router.gr.dart';
 @CustomAutoRouter(
   transitionsBuilder: TransitionsBuilders.noTransition,
   routes: <AutoRoute>[
+    MaterialRoute(page: PageDetail, path: '/detail/:id'),
     MaterialRoute(page: PageLoading, path: '/loading'),
     MaterialRoute(page: PageLogin, path: '/login'),
     MaterialRoute(page: PageDashboard, path: '/', guards: [InitGuard, AuthGuard]),

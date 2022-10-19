@@ -25,6 +25,13 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    PageDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<PageDetailRouteArgs>(
+          orElse: () => PageDetailRouteArgs(id: pathParams.getString('id')));
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: PageDetail(id: args.id, key: args.key));
+    },
     PageLoadingRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const PageLoading());
@@ -41,11 +48,37 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
+        RouteConfig(PageDetailRoute.name, path: '/detail/:id'),
         RouteConfig(PageLoadingRoute.name, path: '/loading'),
         RouteConfig(PageLoginRoute.name, path: '/login'),
         RouteConfig(PageDashboardRoute.name,
             path: '/', guards: [initGuard, authGuard])
       ];
+}
+
+/// generated route for
+/// [PageDetail]
+class PageDetailRoute extends PageRouteInfo<PageDetailRouteArgs> {
+  PageDetailRoute({required String id, Key? key})
+      : super(PageDetailRoute.name,
+            path: '/detail/:id',
+            args: PageDetailRouteArgs(id: id, key: key),
+            rawPathParams: {'id': id});
+
+  static const String name = 'PageDetailRoute';
+}
+
+class PageDetailRouteArgs {
+  const PageDetailRouteArgs({required this.id, this.key});
+
+  final String id;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PageDetailRouteArgs{id: $id, key: $key}';
+  }
 }
 
 /// generated route for
